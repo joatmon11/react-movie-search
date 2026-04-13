@@ -1,0 +1,42 @@
+.hero {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.hero img {
+    width: 95%;
+    height: 80vh;
+    mask-image: linear-gradient(to top, transparent, black 50%);
+}
+
+.hero__caption {
+    position: absolute;
+    margin-top: 30px;
+    font-size: 20px;
+    color: white;
+}
+
+.hero__caption h1 {
+    animation: animate 1s ease-in-out infinite alternate;
+}
+
+@keyframes animate {
+    from {
+        text-shadow: 0 0 10px #ecee5d;
+    }
+    to {
+        text-shadow: 0 0 20px #ecee5d,
+                    0 0 5px #ecee5d
+    }
+}
+
+.search__bar {
+    position: absolute;
+}
+
+.titlecards {
+    position: absolute;
+}
+
+
