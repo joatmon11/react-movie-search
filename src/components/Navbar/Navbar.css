@@ -35,3 +35,7 @@
     display: flex;
     gap: 3px;
 }
+
+.contact:hover {
+    cursor: not-allowed;
+}

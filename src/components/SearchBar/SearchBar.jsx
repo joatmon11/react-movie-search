@@ -4,8 +4,9 @@ import "./SearchBar.css";
 const SearchBar = () => {
   return (
     <div class="search__bar">
-      {/* <h1 class="main__title">Browse our movies</h1> */}
+      
       <div className="search__wrapper">
+        <h1 class="main__title">Browse our movies</h1>
         <input
           className="search__box"
           type="text"

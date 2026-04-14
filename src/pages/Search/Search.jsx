@@ -1,10 +1,17 @@
 import React from 'react'
 import './Search.css'
+import Navbar from '../../components/Navbar/Navbar'
+import SearchBar from '../../components/SearchBar/SearchBar'
 
 
 const Search = () => {
   return (
-    <div className="search">Search Page</div>
+    <>
+    <Navbar />
+    <div className="search">
+      <SearchBar />
+    </div>
+    </>
   )
 }
 
