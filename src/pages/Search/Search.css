@@ -1,6 +1,46 @@
 .search {
+    width: 100%;
+    max-width: 1200px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+
+}
+
+#search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filter__wrapper {
+    width: 100%;
+    max-width: 600px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.movie__card--list {
+    width: 100%;
+    max-width: 1200px;
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+}
+
+
+.movie__card {
+    width: 200px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    background-color: #f0f0f0;
+    color: black;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

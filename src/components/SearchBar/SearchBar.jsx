@@ -2,11 +2,12 @@ import React from "react";
 import "./SearchBar.css";
 
 const SearchBar = () => {
+  
+
   return (
-    <div class="search__bar">
-      
+    <div className="search__bar">
       <div className="search__wrapper">
-        <h1 class="main__title">Browse our movies</h1>
+        <h1 className="main__title">Browse our movies</h1>
         <input
           className="search__box"
           type="text"

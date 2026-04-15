@@ -1,0 +1,22 @@
+.movieinfo {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+
+}
+
+.movie__card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.movie__details {
+    list-style-type: none;
+}
+
+.movie__details li {
+    margin: 10px 10px;
+}

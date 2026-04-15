@@ -7,11 +7,14 @@ import TitleCards from '../../components/TitleCards/TitleCards'
 import Footer from '../../components/Footer/Footer'
 
 
+
+
 const Home = () => {
+ 
   return (
     <>
+    <Navbar />
     <div className='home'>
-      <Navbar />
       <div className="hero">
         <img src={hero_banner} alt="" />
         <div className="hero__caption">
