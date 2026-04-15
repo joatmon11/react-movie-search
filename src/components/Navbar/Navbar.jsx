@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
     <div className='navbar'>
         <div className="navbar__left">
-            <img src={logo} alt="" />
+            <img src={logo} alt="" onClick={() => navigate('/')} />
         </div>
         <div className="navbar__right">
             <ul>

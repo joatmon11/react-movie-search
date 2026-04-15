@@ -4,7 +4,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: relative;
     background: transparent;
     padding-top: 10px;
 }
@@ -12,6 +11,7 @@
 .navbar__left img {
     width: 300px;
     padding-top: 10px;
+    cursor: pointer;
 }
 
 .navbar__right ul {
@@ -26,6 +26,14 @@
 .navbar__right li {
     cursor: pointer;
 }
+
+.navbar__right li:hover {
+    color: rgb(61, 157, 218);
+    transition: color 0.3s ease;
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+}
+
 
 .navbar__right li img {
     width: 18px;

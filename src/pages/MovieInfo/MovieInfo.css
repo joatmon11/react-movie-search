@@ -1,0 +1,53 @@
+.back__button {
+    width: 150px;
+    height: 50px;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-left: 20px;
+    background-color: rgb(32, 121, 172);
+    border: none;
+    font-weight: 500;
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back__button:hover {
+    background-color: rgb(61, 157, 218);
+}
+
+.MovieInfo {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.movie__details--wrapper {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.movie__details {
+    margin-left: 20px;
+}
+
+.movie__plot {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie__plot p {
+    font-size: 30px;
+}

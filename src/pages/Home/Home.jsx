@@ -10,16 +10,16 @@ import Footer from '../../components/Footer/Footer'
 const Home = () => {
   return (
     <>
+    <Navbar />
     <div className='home'>
-      <Navbar />
       <div className="hero">
         <img src={hero_banner} alt="" />
         <div className="hero__caption">
           <h1 className='hero__title'>Your one stop source for movie information</h1>
-        </div>
-        <SearchBar />
-        <TitleCards />
+        </div>             
+        <SearchBar />   
       </div>
+      <TitleCards />
       <Footer />
     </div>
     </>

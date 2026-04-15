@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "./Search.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Rocket from "../../assets/rocket.svg";
@@ -7,12 +8,64 @@ const MIN_YEAR = 1960;
 const MAX_YEAR = 2026;
 
 const Search = () => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [keyword, setKeyword] = useState("");
   const [allMovies, setAllMovies] = useState([]);
   const [minYear, setMinYear] = useState(MIN_YEAR);
   const [maxYear, setMaxYear] = useState(MAX_YEAR);
   const [searchedKeyword, setSearchedKeyword] = useState("");
   const rangeFillRef = useRef(null);
+  const [rocketStyle, setRocketStyle] = useState(null);
+
+  useEffect(() => {
+    const q = searchParams.get("q");
+    if (q) {
+      setKeyword(q);
+      fetchMoviesForQuery(q);
+    }
+  }, [searchParams]);
+
+  async function fetchMoviesForQuery(query) {
+    const trimmed = query.trim().toLowerCase();
+    if (!trimmed) return;
+    try {
+      const response = await fetch(
+        `https://www.omdbapi.com/?apikey=e3a5001&s=${encodeURIComponent(trimmed)}`,
+      );
+      if (!response.ok) throw new Error("Could not find movies");
+      const data = await response.json();
+      setAllMovies(data.Search || []);
+      setSearchedKeyword(trimmed);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function handleCardClick(movie, e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const startX = rect.left + rect.width / 2 - 50;
+    const startY = rect.top;
+
+    setRocketStyle({
+      left: startX + "px",
+      top: startY + "px",
+      opacity: 1,
+    });
+
+    requestAnimationFrame(() => {
+      setRocketStyle({
+        left: startX + "px",
+        top: "-300px",
+        opacity: 1,
+      });
+    });
+
+    setTimeout(() => {
+      setRocketStyle(null);
+      navigate("/movieInfo", { state: movie });
+    }, 800);
+  }
 
   // Compute the filtered movies from state
   const filteredMovies = allMovies.filter((movie) => {
@@ -51,28 +104,9 @@ const Search = () => {
 
   // Fetch movies from OMDB API
   async function fetchMovies() {
-    const trimmed = keyword.trim().toLowerCase();
-    if (!trimmed) {
+    await fetchMoviesForQuery(keyword);
+    if (!keyword.trim()) {
       alert("Please enter a search keyword.");
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `https://www.omdbapi.com/?apikey=e3a5001&s=${encodeURIComponent(trimmed)}`,
-      );
-
-      if (!response.ok) {
-        throw new Error("Could not find movies");
-      }
-
-      const data = await response.json();
-      console.log(data);
-
-      setAllMovies(data.Search || []);
-      setSearchedKeyword(trimmed);
-    } catch (error) {
-      console.error(error);
     }
   }
 
@@ -150,7 +184,7 @@ const Search = () => {
             <div className="movie__wrapper">
               {filteredMovies.length > 0 ? (
                 filteredMovies.map((movie) => (
-                  <div className="movie__card" key={movie.imdbID}>
+                  <div className="movie__card" key={movie.imdbID} onClick={(e) => handleCardClick(movie, e)}>
                     <div className="movie__poster">
                       <img
                         className="poster__img"
@@ -161,15 +195,6 @@ const Search = () => {
                     <div className="movie__info">
                       <h3 className="movie__title">{movie.Title}</h3>
                       <p className="movie__year">{movie.Year}</p>
-                      <a
-                        href={`https://www.imdb.com/title/${movie.imdbID}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="movie__id"
-                      >
-                        imdbID: {movie.imdbID}
-                      </a>
-                      <div className="movie__type">Type: {movie.Type}</div>
                     </div>
                   </div>
                 ))
@@ -189,6 +214,14 @@ const Search = () => {
           </div>
         </section>
       </div>
+      {rocketStyle && (
+        <img
+          className="rocket--flying"
+          src={Rocket}
+          alt="Rocket"
+          style={rocketStyle}
+        />
+      )}
     </>
   );
 };
