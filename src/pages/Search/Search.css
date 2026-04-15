@@ -303,7 +303,12 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 @media (max-width: 768px) {
+    .main__title {
+        font-size: 30px;
+    }
+
     .filter__wrapper {
+        padding-top: 0;
         flex-direction: column;
         gap: 20px;
     }
@@ -320,4 +325,35 @@ input[type="range"]::-webkit-slider-runnable-track {
     .results__title {
         font-size: 24px;
     }
+    .price__filter--wrapper {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    #search {
+        width: 100%;
+        max-width: 400px;
+    }
+    .filter__title {
+        font-size: 20px;
+    }
+    .results__title {
+        font-size: 20px;
+    }
+    .price__filter--wrapper {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+    }
+    .filter__wrapper h2{
+        font-size: 20px;
+    }
+
+    .movie__wrapper {
+        flex-direction: column;
+        gap: 10px;
+    }
+
 }

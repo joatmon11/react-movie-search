@@ -49,3 +49,10 @@
                     0 0 5px #ecee5d
     }
 }
+
+@media (max-width: 480px) {
+    .card__list img {
+        width: 120px;
+        height: 75px;
+    }
+}
