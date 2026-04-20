@@ -17,6 +17,7 @@ const Search = () => {
   const [searchedKeyword, setSearchedKeyword] = useState("");
   const rangeFillRef = useRef(null);
   const [rocketStyle, setRocketStyle] = useState(null);
+  const [sortOrder, setSortOrder] = useState("yearOrder");
 
   useEffect(() => {
     const q = searchParams.get("q");
@@ -68,10 +69,19 @@ const Search = () => {
   }
 
   // Compute the filtered movies from state
-  const filteredMovies = allMovies.filter((movie) => {
-    const year = parseInt(movie.Year);
-    return year >= minYear && year <= maxYear;
-  });
+  const filteredMovies = allMovies
+    .filter((movie) => {
+      const year = parseInt(movie.Year);
+      return year >= minYear && year <= maxYear;
+    })
+    .sort((a, b) => {
+      if (sortOrder === "ascending") {
+        return parseInt(a.Year) - parseInt(b.Year);
+      } else if (sortOrder === "descending") {
+        return parseInt(b.Year) - parseInt(a.Year);
+      }
+      return 0;
+    });
 
   // Build the filter title from state
   const filterTitle = searchedKeyword
@@ -147,7 +157,7 @@ const Search = () => {
           </div>
         </section>
         <section id="search">
-          <div className="progress-bar"></div>
+          {/* <div className="progress-bar"></div> */}
           <div className="filter__wrapper">
             <div
               className="filter__title"
@@ -180,11 +190,25 @@ const Search = () => {
           </div>
         </section>
         <section id="results">
+          <select
+            name="year-order"
+            id="yo-select"
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+          >
+            <option value="yearOrder">Sort by year?</option>
+            <option value="ascending">Oldest to newest</option>
+            <option value="descending">Newest to oldest</option>
+          </select>
           <div className="container results__container">
             <div className="movie__wrapper">
               {filteredMovies.length > 0 ? (
                 filteredMovies.map((movie) => (
-                  <div className="movie__card" key={movie.imdbID} onClick={(e) => handleCardClick(movie, e)}>
+                  <div
+                    className="movie__card"
+                    key={movie.imdbID}
+                    onClick={(e) => handleCardClick(movie, e)}
+                  >
                     <div className="movie__poster">
                       <img
                         className="poster__img"
@@ -195,14 +219,13 @@ const Search = () => {
                     <div className="movie__info">
                       <h3 className="movie__title">{movie.Title}</h3>
                       <p className="movie__year">{movie.Year}</p>
+                      <p> {movie.imdbRating}</p>
                     </div>
                   </div>
                 ))
               ) : (
                 <div className="launcher">
-                  <h1 className="results__title">
-                    Search to launch results!
-                  </h1>
+                  <h1 className="results__title">Search to launch results!</h1>
                   <img
                     className="launch__img"
                     src={Rocket}

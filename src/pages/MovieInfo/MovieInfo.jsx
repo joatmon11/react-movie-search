@@ -55,10 +55,11 @@ const MovieInfo = () => {
             <p>{details.Year}</p>
             <p>{details.Rated}</p>
             <p>{details.Runtime}</p>
-            <p>{details.Director}</p>
-            <p>{details.Actors}</p>
+            <p>Director: {details.Director}</p>
+            <p>Staring: {details.Actors}</p>
+            <p>IMDB Rating: {details.imdbRating}</p>
             <p>{details.Ratings.map((rating, index) => (
-              <span key={index}>{rating.Source} Rating: {rating.Value}</span>
+              <span key={index}>{rating.Source} Rating: {rating.Value} </span>
             ))}</p>
           </div>
         </div>

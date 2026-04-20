@@ -14,7 +14,7 @@
     cursor: pointer;
 }
 
-.navbar__right ul {
+.navbar__right > ul {
     font-family: 'Courier New', Courier, monospace;
     list-style: none;
     display: flex;
@@ -48,8 +48,15 @@
     cursor: not-allowed;
 }
 
+/* @media (max-width: 800px) {
+    .navbar__right > ul {
+        right: 2rem;
+        gap: 1rem;
+    }
+} */
+
 @media (max-width: 768px) {
-    .navbar__right ul {
+    .navbar__right > ul {
         display: none;
     }
     

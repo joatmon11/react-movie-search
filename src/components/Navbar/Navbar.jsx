@@ -3,6 +3,7 @@ import './Navbar.css'
 import logo from '../../assets/Movie Search logo design.png'
 import search from '../../assets/search_icon.svg'
 import { useNavigate } from 'react-router-dom'
+import Menu from '../Menu/Menu'
 
 
 const Navbar = () => {
@@ -20,6 +21,7 @@ const Navbar = () => {
                 <li className='search__icon' onClick={() => navigate('/search')}><img src={search} alt=""/>Search</li>
                 <li className='contact'> Contact</li>
             </ul>
+            <Menu />
         </div>
     
     
