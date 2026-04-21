@@ -8,6 +8,8 @@ import Footer from '../../components/Footer/Footer'
 
 
 const Home = () => {
+  const [searchQuery, setSearchQuery] = React.useState('')
+
   return (
     <>
     <Navbar />
@@ -17,9 +19,9 @@ const Home = () => {
         <div className="hero__caption">
           <h1 className='hero__title'>Your one stop source for movie information</h1>
         </div>             
-        <SearchBar />   
+        <SearchBar externalQuery={searchQuery} onSearch={setSearchQuery} />   
       </div>
-      <TitleCards />
+      <TitleCards onCardClick={setSearchQuery} />
       <Footer />
     </div>
     </>

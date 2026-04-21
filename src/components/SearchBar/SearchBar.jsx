@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SearchBar.css";
 
-const SearchBar = () => {
+const SearchBar = ({ externalQuery, onSearch }) => {
   const [input, setInput] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (externalQuery && externalQuery.trim() !== "") {
+    setInput(externalQuery);
+    navigate(`/search?q=${encodeURIComponent(externalQuery)}`);
+    }
+  }, [externalQuery]);
 
   function handleSearch() {
     const trimmed = input.trim();

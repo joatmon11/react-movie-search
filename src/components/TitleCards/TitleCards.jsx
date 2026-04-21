@@ -4,7 +4,7 @@ import cards_data from '../../assets/cards/Cards_data'
 
 
 
-const TitleCards = () => {
+const TitleCards = ({ onCardClick }) => {
     const cardsRef = useRef();
 const handleWheel = (event) => {
     event.preventDefault();
@@ -21,7 +21,11 @@ useEffect(() => {
         <div className="card__list" ref={cardsRef}>
             {cards_data.map((card, index) => {
                 return (
-                    <div className="card" key={index}>
+                    <div 
+                    className="card" 
+                    key={index} 
+                    onClick={() => onCardClick(card.name)}
+                    style={{ cursor: 'pointer' }}>
                         <img src={card.image} alt="" />
                         <p>{card.name}</p>
                     </div>
