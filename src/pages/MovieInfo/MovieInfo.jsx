@@ -27,7 +27,7 @@ const MovieInfo = () => {
     return (
       <div className="MovieInfo">
         <p>No movie selected.</p>
-        <button className="back__button" onClick={() => navigate("/search")}>
+        <button className="back__button" onClick={() => navigate(-1) ?? navigate("/search")}>
           Back to Search
         </button>
       </div>
@@ -44,7 +44,7 @@ const MovieInfo = () => {
 
   return (
     <>
-      <button className="back__button" onClick={() => navigate("/search")}>
+      <button className="back__button" onClick={() => navigate(-1) ?? navigate("/search")}>
         Back to Search
       </button>
       <div className="MovieInfo">
@@ -56,11 +56,11 @@ const MovieInfo = () => {
             <p>{details.Rated}</p>
             <p>{details.Runtime}</p>
             <p>Director: {details.Director}</p>
-            <p>Staring: {details.Actors}</p>
+            <p>Starring: {details.Actors}</p>
             <p>IMDB Rating: {details.imdbRating}</p>
-            <p>{details.Ratings.map((rating, index) => (
+            {(details.Ratings ?? [{ Source: "Other Sources", Value: "N/A" }]).map((rating, index) => (
               <span key={index}>{rating.Source} Rating: {rating.Value} </span>
-            ))}</p>
+            ))}
           </div>
         </div>
         <div className="movie__plot">

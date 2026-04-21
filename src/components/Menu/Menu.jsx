@@ -31,12 +31,4 @@ function Menu() {
 
 export default Menu;
 
-{
-  /* <div className='fixed top-0 left-0 w-full h-screen bg-black text-white flex flex-col items-center justify-center z-50'>
-          <header className='fixed flex items-center justify-end'>
-          </header>
-          <main className='flex items-center justify-center h-screen text-4xl text-center'>
-          this is a centered window
-          </main>
-        </div> */
-}
+

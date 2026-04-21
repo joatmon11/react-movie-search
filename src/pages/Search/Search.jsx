@@ -18,18 +18,42 @@ const Search = () => {
   const rangeFillRef = useRef(null);
   const [rocketStyle, setRocketStyle] = useState(null);
   const [sortOrder, setSortOrder] = useState("yearOrder");
+  const [loading, setLoading] = useState(false);
+
+  const SkeletonCard = () => (
+    <div className="movie__card skeleton">
+      <div className="skeleton__poster" />
+      <div className="movie__info">
+        <div className="skeleton__line skeleton__title" />
+        <div className="skeleton__line skeleton__year" />
+      </div>
+    </div>
+  );
 
   useEffect(() => {
     const q = searchParams.get("q");
+    const min = searchParams.get("minYear");
+    const max = searchParams.get("maxYear");
+    const sort = searchParams.get("sortOrder");
     if (q) {
       setKeyword(q);
       fetchMoviesForQuery(q);
+    }
+    if (min !== null) {
+      setMinYear(parseInt(min));
+    }
+    if (max !== null) {
+      setMaxYear(parseInt(max));
+    }
+    if (sort) {
+      setSortOrder(sort);
     }
   }, [searchParams]);
 
   async function fetchMoviesForQuery(query) {
     const trimmed = query.trim().toLowerCase();
     if (!trimmed) return;
+    setLoading(true);
     try {
       const response = await fetch(
         `https://www.omdbapi.com/?apikey=e3a5001&s=${encodeURIComponent(trimmed)}`,
@@ -40,10 +64,20 @@ const Search = () => {
       setSearchedKeyword(trimmed);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   }
 
   function handleCardClick(movie, e) {
+    const params = new URLSearchParams({
+      q: keyword,
+      minYear,
+      maxYear,
+      sortOrder,
+    });
+    navigate(`/search?${params.toString()}`);
+
     const rect = e.currentTarget.getBoundingClientRect();
     const startX = rect.left + rect.width / 2 - 50;
     const startY = rect.top;
@@ -206,7 +240,9 @@ const Search = () => {
           </select>
           <div className="container results__container">
             <div className="movie__wrapper">
-              {filteredMovies.length > 0 ? (
+              {loading ? (
+                  Array.from({ length: 8 }).map((_, index) => <SkeletonCard key={index} />) 
+              ) : filteredMovies.length > 0 ? (
                 filteredMovies.map((movie) => (
                   <div
                     className="movie__card"
