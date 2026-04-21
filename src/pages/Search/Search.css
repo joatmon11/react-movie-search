@@ -70,13 +70,12 @@ a {
 .search__box:hover {
     outline: 2px solid rgb(246, 250, 11);
     transition: outline 0.3s ease;
-
 }
 
-.search__logo {
+.search__button {
+    border: none;
+    background: none;
     cursor: pointer;
-    position: absolute;
-    right: 20px;
 }
 
 .fa-solid {

@@ -149,10 +149,14 @@ const Search = () => {
               onChange={(e) => setKeyword(e.target.value)}
               onKeyPress={handleKeyPress}
             />
-            <div className="search__logo" onClick={handleSearchClick}>
-              <a href="#">
+            <div className="search__logo">
+              <button
+                type="button"
+                className="search__button"
+                onClick={handleSearchClick}
+              >
                 <i className="fa-solid fa-magnifying-glass"></i>
-              </a>
+              </button>
             </div>
           </div>
         </section>
